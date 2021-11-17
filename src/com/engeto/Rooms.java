@@ -19,17 +19,17 @@ public class Rooms {
 
 
     public String getDescription(){
-        return roomNumber + " number " + typeOfBed +" room "+" with "+ givebalcony() +" and "+giveViewOfTheSea() +" with price "+ price +" Kč/night";
+        return roomNumber + " number " + typeOfBed +" room "+" with "+ giveBalcony() +" and "+giveViewOfTheSea() +" with price "+ price +" Kč/night";
     }
 
-    public String givebalcony(){
-        if (isBalcony()==true)
+    public String giveBalcony(){
+        if (isBalcony())
             return "balcony";
         return "no balcony";
     }
 
     public String giveViewOfTheSea (){
-        if (isViewOfTheSea()==true)
+        if (isViewOfTheSea())
             return "view of the sea";
             return "no view of the sea";
     }
