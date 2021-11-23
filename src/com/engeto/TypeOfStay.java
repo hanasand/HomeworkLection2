@@ -4,7 +4,7 @@ package com.engeto;
         OCCUPATIONAL_STAY("occupational stay"),
         HOLIDAY_STAY("holiday stay");
 
-        String description;
+        final String description;
 
 
         TypeOfStay(String description) {

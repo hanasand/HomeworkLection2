@@ -1,85 +1,86 @@
 package com.engeto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Booking {
-    private int roomNumber;
-    private LocalDate longOfStayFrom;
-    private LocalDate longOfStayUntil;
-    private String name1;
-    private String name2;
-    TypeOfStay typeOfStay;
+    Guest mainGuest;
+    String name;
+    List<Guest> otherGuests = new ArrayList<>();
+    Room room;
+    LocalDate begin;
+    LocalDate end;
+    TypeOfStay type;
 
-    public Booking(String name1, int roomNumber, LocalDate longOfStayFrom,LocalDate longOfStayUntil) {
-        this.name1 = name1;
-        this.roomNumber = roomNumber;
-        this.longOfStayFrom = longOfStayFrom;
-        this.longOfStayUntil = longOfStayUntil;
+    public Booking(Guest mainGuest, Room room, LocalDate begin, LocalDate end, TypeOfStay type) {
+        this.mainGuest = mainGuest;
+        this.room = room;
+        this.begin = begin;
+        this.end = end;
+        this.type = type;
+    }
+    public Booking(Guest mainGuest, Room room) {
+        this(mainGuest, room, LocalDate.now(), LocalDate.now().plusDays(7), TypeOfStay.HOLIDAY_STAY);
     }
 
-    public Booking(String name1, String name2, int roomNumber, LocalDate longOfStayFrom,LocalDate longOfStayUntil) {
-        this.name1 = name1;
-        this.name2 = name2;
-        this.roomNumber = roomNumber;
-        this.longOfStayFrom = longOfStayFrom;
-        this.longOfStayUntil = longOfStayUntil;
+    public Guest getMainGuest() {
+        return mainGuest;
     }
 
-    public String getDescription(){
-        return "Booking for "+ name1 +" in room number " + roomNumber + " from "+ longOfStayFrom + " until " +longOfStayUntil;
+    public void setMainGuest(Guest mainGuest) {
+        this.mainGuest = mainGuest;
     }
 
-    public String getDescription2(){
-        return "Booking for "+name1+ " and " +name2+" in room number " + roomNumber + " from "+ longOfStayFrom + " until " +longOfStayUntil;
+    public TypeOfStay getType() {
+        return type;
     }
 
-
-    public int getRoomNumber() {
-        return roomNumber;
+    public void setType(TypeOfStay type) {
+        this.type = type;
     }
 
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
+    public void addGuest(Guest newGuest) {
+        otherGuests.add(newGuest);
     }
 
-    public LocalDate getLongOfStayFrom() {
-        return longOfStayFrom;
+    public void removeGuest(Guest guest) {
+        otherGuests.remove(guest);
+    }
+    public void clearOtherGuests() {
+        otherGuests.clear();
     }
 
-    public void setLongOfStayFrom(LocalDate LongOfStayFrom) {
-        this.longOfStayFrom = LongOfStayFrom;
+    public Room getRoom() {
+        return room;
     }
 
-
-    public LocalDate getLongOfStayUntil() {
-        return longOfStayUntil;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
-    public void setLongOfStayUntil(LocalDate longOfStayUntil) {
-        this.longOfStayUntil = longOfStayUntil;
+    public LocalDate getBegin() {
+        return begin;
     }
 
-    public String getName1() {
-        return name1;
+    public void setBegin(LocalDate begin) {
+        this.begin = begin;
     }
 
-    public void setName1(String name1) {
-        this.name1 = name1;
+    public LocalDate getEnd() {
+        return end;
     }
 
-    public String getName2() {
-        return name2;
+    public void setEnd(LocalDate end) {
+        this.end = end;
     }
 
-    public void setName2(String name2) {
-        this.name2 = name2;
-    }
-
-    public TypeOfStay getTypeOfStay() {
-        return typeOfStay;
-    }
-
-    public void setTypeOfStay(TypeOfStay typeOfStay) {
-        this.typeOfStay = typeOfStay;
+    public String getDescription() {
+        StringBuilder result = new StringBuilder("Booking for "+mainGuest.getName()+" ("+type
+                +") from " + begin.toString() + " to " + end.toString() + " other guests: ");
+        for (Guest guest : otherGuests) {
+            result.append(guest.getName()).append(" , ");
+        }
+        return result.toString();
     }
 }
